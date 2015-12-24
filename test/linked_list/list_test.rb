@@ -83,6 +83,22 @@ describe LinkedList::List do
       subject.tail.must_equal node_2
     end
 
+    it "accepts values" do
+      subject << 1
+      subject << 2
+
+      subject.first.must_equal 1
+      subject.last.must_equal 2
+    end
+
+    it "forms nodes from values" do
+      subject << 1
+      subject << 2
+
+      subject.head.must_be_kind_of LinkedList::Node
+      subject.tail.must_be_kind_of LinkedList::Node
+    end
+
     it "returns self" do
       list = subject.push(node_1)
 
@@ -139,6 +155,28 @@ describe LinkedList::List do
       subject.unshift(node_2)
 
       node_2.next.must_equal node_1
+    end
+
+    it "accepts values" do
+      subject.unshift 1
+      subject.unshift 2
+
+      subject.first.must_equal 2
+      subject.last.must_equal 1
+    end
+
+    it "forms nodes from values" do
+      subject.unshift 1
+      subject.unshift 2
+
+      subject.head.must_be_kind_of LinkedList::Node
+      subject.tail.must_be_kind_of LinkedList::Node
+    end
+
+    it "returns self" do
+      list = subject.unshift(node_1)
+
+      subject.must_equal list
     end
   end
 

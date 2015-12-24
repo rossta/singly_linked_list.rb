@@ -11,6 +11,7 @@ module LinkedList
     end
 
     def push(node)
+      node = LinkedList::Node(node)
       @head ||= node
       @tail.next = node if @tail
       @tail = node
@@ -20,6 +21,7 @@ module LinkedList
     alias_method :<<, :push
 
     def unshift(node)
+      node = LinkedList::Node(node)
       @tail ||= node
       node.next = @head if @head
       @head = node
