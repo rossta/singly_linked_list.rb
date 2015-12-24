@@ -20,5 +20,13 @@ module LinkedList
       @tail
     end
     alias_method :<<, :push
+
+    def first
+      head && head.value
+    end
+
+    def last
+      tail && tail.value
+    end
   end
 end
