@@ -142,6 +142,52 @@ describe LinkedList::List do
     end
   end
 
+  describe "#pop" do
+    it "returns nil" do
+      subject.pop.must_be_nil
+    end
+
+    it "returns tail value" do
+      node_1.value = "foo"
+
+      subject << node_1
+
+      subject.pop.must_equal "foo"
+    end
+
+    it "decreases length" do
+      subject << node_1
+      subject << node_2
+
+      subject.pop
+      subject.length.must_equal 1
+
+      subject.pop
+      subject.length.must_equal 0
+    end
+
+    it "is empty" do
+      subject << node_1
+      subject.pop
+
+      subject.must_be :empty?
+    end
+
+    it "sets tail to nil for empty" do
+      subject << node_1
+      subject.pop
+
+      subject.tail.must_be_nil
+    end
+
+    it "sets head to nil for empty" do
+      subject << node_1
+      subject.pop
+
+      subject.head.must_be_nil
+    end
+  end
+
   describe "#first" do
     it "returns nil" do
       subject.first.must_be_nil

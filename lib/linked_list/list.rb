@@ -3,9 +3,7 @@ module LinkedList
     attr_reader :head, :tail, :length
 
     def initialize
-      @head = nil
-      @tail = nil
-      @length = 0
+      reset
     end
 
     def empty?
@@ -29,12 +27,43 @@ module LinkedList
       self
     end
 
+    def pop
+      return nil if empty?
+
+      value = @tail.value
+
+      prev = nil
+      curr = @head
+
+      while curr
+        prev = curr
+        curr = curr.next
+      end
+
+      @tail = prev
+
+      if @tail == @head
+        reset
+      else
+        @tail.next = nil
+        @length -= 1
+      end
+
+      value
+    end
+
     def first
       head && head.value
     end
 
     def last
       tail && tail.value
+    end
+
+    def reset
+      @head = nil
+      @tail = nil
+      @length = 0
     end
   end
 end
