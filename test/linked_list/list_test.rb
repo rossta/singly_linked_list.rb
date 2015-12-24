@@ -147,12 +147,22 @@ describe LinkedList::List do
       subject.pop.must_be_nil
     end
 
-    it "returns tail value" do
+    it "returns only value" do
       node_1.value = "foo"
 
       subject << node_1
 
       subject.pop.must_equal "foo"
+    end
+
+    it "returns tail value" do
+      node_1.value = "foo"
+      node_2.value = "bar"
+
+      subject << node_1
+      subject << node_2
+
+      subject.pop.must_equal "bar"
     end
 
     it "decreases length" do
@@ -183,6 +193,62 @@ describe LinkedList::List do
     it "sets head to nil for empty" do
       subject << node_1
       subject.pop
+
+      subject.head.must_be_nil
+    end
+  end
+
+  describe "#shift" do
+    it "returns nil" do
+      subject.shift.must_be_nil
+    end
+
+    it "returns only value" do
+      node_1.value = "foo"
+
+      subject << node_1
+
+      subject.shift.must_equal "foo"
+    end
+
+    it "returns head value" do
+      node_1.value = "foo"
+      node_2.value = "bar"
+
+      subject << node_1
+      subject << node_2
+
+      subject.shift.must_equal "foo"
+    end
+
+    it "decreases length" do
+      subject << node_1
+      subject << node_2
+
+      subject.shift
+      subject.length.must_equal 1
+
+      subject.shift
+      subject.length.must_equal 0
+    end
+
+    it "is empty" do
+      subject << node_1
+      subject.shift
+
+      subject.must_be :empty?
+    end
+
+    it "sets tail to nil for empty" do
+      subject << node_1
+      subject.shift
+
+      subject.tail.must_be_nil
+    end
+
+    it "sets head to nil for empty" do
+      subject << node_1
+      subject.shift
 
       subject.head.must_be_nil
     end

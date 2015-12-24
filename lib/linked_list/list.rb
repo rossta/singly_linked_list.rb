@@ -52,6 +52,21 @@ module LinkedList
       value
     end
 
+    def shift
+      return nil if empty?
+
+      value = @head.value
+
+      if @tail == @head
+        reset
+      else
+        @head = @head.next
+        @length -= 1
+      end
+
+      value
+    end
+
     def first
       head && head.value
     end
