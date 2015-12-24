@@ -17,9 +17,17 @@ module LinkedList
       @tail.next = node if @tail
       @tail = node
       @length += 1
-      @tail
+      self
     end
     alias_method :<<, :push
+
+    def unshift(node)
+      @tail ||= node
+      node.next = @head if @head
+      @head = node
+      @length += 1
+      self
+    end
 
     def first
       head && head.value

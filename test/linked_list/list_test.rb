@@ -82,6 +82,64 @@ describe LinkedList::List do
       subject.head.must_equal node_1
       subject.tail.must_equal node_2
     end
+
+    it "returns self" do
+      list = subject.push(node_1)
+
+      subject.must_equal list
+    end
+  end
+
+  describe "#unshift" do
+    it "adds first node as head" do
+      subject.unshift(node_1)
+
+      subject.head.must_equal node_1
+    end
+
+    it "adds first node as tail" do
+      subject.unshift(node_1)
+
+      subject.tail.must_equal node_1
+    end
+
+    it "will not be empty" do
+      subject.unshift(node_1)
+
+      subject.wont_be :empty?
+    end
+
+    it "increases length" do
+      subject.unshift(node_1)
+
+      subject.length.must_equal 1
+
+      subject.unshift(node_2)
+
+      subject.length.must_equal 2
+    end
+
+    it "preserves tail of list" do
+      subject.unshift(node_1)
+      subject.unshift(node_2)
+
+      subject.tail.must_equal node_1
+    end
+
+    it "adds node to head of list" do
+      subject.unshift(node_1)
+      subject.unshift(node_2)
+
+      subject.head.must_equal node_2
+      subject.tail.must_equal node_1
+    end
+
+    it "sets references to next node" do
+      subject.unshift(node_1)
+      subject.unshift(node_2)
+
+      node_2.next.must_equal node_1
+    end
   end
 
   describe "#first" do
