@@ -223,4 +223,41 @@ describe LinkedList::List do
       subject.last.must_equal "bar"
     end
   end
+
+  describe "#clear" do
+    it "sets length to 0" do
+      subject << node_1
+
+      subject.clear
+      subject.length.must_equal 0
+    end
+
+    it "empties" do
+      subject << node_1
+
+      subject.clear
+      subject.must_be :empty?
+    end
+
+    it "sets head to nil" do
+      subject << node_1
+      subject.clear
+      subject.head.must_be_nil
+    end
+
+    it "sets tail to nil" do
+      subject << node_1
+      subject.clear
+      subject.tail.must_be_nil
+    end
+
+    it "aliases to reset" do
+      subject << node_1
+      subject.reset
+      subject.head.must_be_nil
+      subject.tail.must_be_nil
+      subject.must_be :empty?
+      subject.length.must_equal 0
+    end
+  end
 end

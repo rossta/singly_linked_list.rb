@@ -60,10 +60,11 @@ module LinkedList
       tail && tail.value
     end
 
-    def reset
+    def clear
       @head = nil
       @tail = nil
       @length = 0
     end
+    alias_method :reset, :clear
   end
 end
