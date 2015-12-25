@@ -69,6 +69,28 @@ module LinkedList
       value
     end
 
+    def reverse
+      return self if empty?
+
+      prev = @head
+      foll = prev.next
+      curr = prev.next
+
+      prev.next = nil
+      @tail = prev
+
+      while foll
+        foll = foll.next
+        curr.next = prev
+        prev = curr
+        curr = foll
+      end
+
+      @head = prev
+
+      self
+    end
+
     def first
       head && head.value
     end

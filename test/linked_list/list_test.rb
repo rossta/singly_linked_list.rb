@@ -364,4 +364,37 @@ describe LinkedList::List do
       subject.length.must_equal 0
     end
   end
+
+  describe "#reverse" do
+    it "reverses items in list" do
+      subject << 1
+      subject << 2
+      subject << 3
+
+      list = subject.reverse
+
+      list.shift.must_equal 3
+      list.shift.must_equal 2
+      list.shift.must_equal 1
+    end
+
+    it "returns empty" do
+      list = subject.reverse
+
+      list.must_be :empty?
+    end
+
+    it "returns 1 item list" do
+      subject << 1
+
+      list = subject.reverse
+
+      list.head.value.must_equal 1
+      list.tail.value.must_equal 1
+    end
+
+    it "returns new list" do
+
+    end
+  end
 end
