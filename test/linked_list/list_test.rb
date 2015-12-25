@@ -394,7 +394,9 @@ describe LinkedList::List do
     end
 
     it "returns new list" do
-
+      subject << 1
+      list = subject.reverse
+      list.object_id.wont_equal subject.object_id
     end
   end
 

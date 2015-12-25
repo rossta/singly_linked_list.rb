@@ -72,17 +72,21 @@ module LinkedList
     end
 
     def reverse
+      LinkedList::List(to_a).reverse!
+    end
+
+    def reverse!
       return self if empty?
 
       prev = @head
-      foll = prev.next
+      swap = prev.next
       curr = prev.next
 
-      while foll
-        foll = foll.next
+      while swap
+        swap = swap.next
         curr.next = prev
         prev = curr
-        curr = foll
+        curr = swap
       end
 
       @head, @tail = @tail, @head
@@ -96,6 +100,10 @@ module LinkedList
       each_node do |node|
         yield node.value
       end
+    end
+
+    def to_a
+      each.to_a
     end
 
     def first
@@ -126,4 +134,9 @@ module LinkedList
       end
     end
   end
+
+  def List(ary)
+    ary.each_with_object(List.new) { |item, list| list << item }
+  end
+  module_function :List
 end
