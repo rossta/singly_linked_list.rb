@@ -397,4 +397,38 @@ describe LinkedList::List do
 
     end
   end
+
+  describe "#each" do
+    it "yields each value" do
+      subject << 1
+      subject << 2
+      subject << 3
+
+      result = []
+      subject.each { |item| result << item }
+
+      result.must_equal [1, 2, 3]
+    end
+
+    it "is empty" do
+      result = []
+      subject.each { |item| result << item }
+
+      result.must_be :empty?
+    end
+
+    it "implements Enumerable" do
+      subject.must_be_kind_of Enumerable
+    end
+
+    it "returns Enumerator without block" do
+      subject << 1
+      subject << 2
+      subject << 3
+
+      enum = subject.each
+
+      enum.map { |n| n }.must_equal [1, 2, 3]
+    end
+  end
 end

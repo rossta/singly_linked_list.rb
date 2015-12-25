@@ -1,5 +1,7 @@
 module LinkedList
   class List
+    include Enumerable
+
     attr_reader :head, :tail, :length
 
     def initialize
@@ -89,6 +91,16 @@ module LinkedList
       @head = prev
 
       self
+    end
+
+    def each
+      return enum_for(:each) unless block_given?
+
+      node = @head
+      while node
+        yield node.value
+        node = node.next
+      end
     end
 
     def first
