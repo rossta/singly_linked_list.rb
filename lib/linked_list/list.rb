@@ -78,9 +78,6 @@ module LinkedList
       foll = prev.next
       curr = prev.next
 
-      prev.next = nil
-      @tail = prev
-
       while foll
         foll = foll.next
         curr.next = prev
@@ -88,7 +85,7 @@ module LinkedList
         curr = foll
       end
 
-      @head = prev
+      @head, @tail = @tail, @head
 
       self
     end
@@ -96,10 +93,8 @@ module LinkedList
     def each
       return enum_for(:each) unless block_given?
 
-      node = @head
-      while node
+      each_node do |node|
         yield node.value
-        node = node.next
       end
     end
 
@@ -117,5 +112,18 @@ module LinkedList
       @length = 0
     end
     alias_method :reset, :clear
+
+    private
+
+    def each_node
+      return enum_for(:each_node) unless block_given?
+
+      node = @head
+      while node
+        foll = node.next
+        yield node
+        node = foll
+      end
+    end
   end
 end
