@@ -424,13 +424,59 @@ describe LinkedList::List do
     end
 
     it "returns Enumerator without block" do
-      subject << 1
-      subject << 2
-      subject << 3
+      subject << 1 << 2 << 3
 
       enum = subject.each
 
       enum.map { |n| n }.must_equal [1, 2, 3]
+    end
+  end
+
+  describe "#delete" do
+    it "removes from head" do
+      subject << 1 << 2 << 3
+
+      subject.delete(1)
+
+      subject.is_empty
+    end
+
+    it "removes from middle" do
+      subject << 1 << 2 << 3
+
+      subject.delete(2)
+
+      subject.to_a.must_equal [1, 3]
+    end
+
+    it "removes from tail" do
+      subject << 1 << 2 << 3
+
+      subject.delete(3)
+
+      subject.to_a.must_equal [1, 2]
+    end
+
+    it "is empty" do
+      subject.delete(1) # no op
+
+      subject.must_be :empty?
+    end
+
+    it "becomes empty" do
+      subject << 1
+
+      subject.delete(1)
+
+      subject.must_be :empty?
+    end
+
+    it "removes first match only" do
+      subject << 1 << 1
+
+      subject.delete(1)
+
+      subject.to_a.must_equal [1]
     end
   end
 end

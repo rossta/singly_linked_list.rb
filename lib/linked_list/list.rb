@@ -121,6 +121,9 @@ module LinkedList
     end
     alias_method :reset, :clear
 
+    def delete(val)
+    end
+
     private
 
     def each_node
