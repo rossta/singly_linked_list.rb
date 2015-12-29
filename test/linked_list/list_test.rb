@@ -438,7 +438,7 @@ describe LinkedList::List do
 
       subject.delete(1)
 
-      subject.is_empty
+      subject.to_a.must_equal [2, 3]
     end
 
     it "removes from middle" do

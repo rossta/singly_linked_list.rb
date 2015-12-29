@@ -121,7 +121,20 @@ module LinkedList
     end
     alias_method :reset, :clear
 
-    def delete(val)
+    def delete(value)
+      return nil if empty?
+      prev, node = nil, @head
+
+      loop do
+        if node.value == value
+          prev.next = node.next if prev
+          @head = node.next if node == @head
+          @tail = prev if node == @tail
+          return value
+        end
+
+        prev, node = node, node.next
+      end
     end
 
     private
